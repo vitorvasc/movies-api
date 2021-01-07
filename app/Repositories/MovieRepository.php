@@ -16,13 +16,14 @@ class MovieRepository
      */
     public function find_by_id(string $id)
     {
-        $movie = Movie::where('id', $id)->with('ratings')->first()
-            ->get_people_roles()
-            ->get_ratings_average();
+        $movie = Movie::where('id', $id)->with('ratings')->first();
 
         if (!$movie) {
             throw new Exception('Filme não encontrado.', 404);
         }
+
+        $movie->get_people_roles()
+            ->get_ratings_average();
 
         return $movie;
     }
