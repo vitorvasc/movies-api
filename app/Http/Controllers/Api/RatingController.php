@@ -102,15 +102,6 @@ class RatingController extends Controller
     public function update(Request $request, string $id): JsonResponse
     {
         try {
-            $validator = Validator::make($request->all(), [
-                'movie_id' => 'required|integer',
-                'rating' => 'required|integer'
-            ]);
-
-            if ($validator->fails()) {
-                throw new Exception($validator->errors());
-            }
-
             $response = [
                 'success' => true,
                 'data' => $this->repository->update_by_id($id, $request->all())

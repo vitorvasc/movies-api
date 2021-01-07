@@ -100,14 +100,6 @@ class PersonController extends Controller
     public function update(Request $request, string $id): JsonResponse
     {
         try {
-            $validator = Validator::make($request->all(), [
-                'name' => 'required'
-            ]);
-
-            if ($validator->fails()) {
-                throw new Exception($validator);
-            }
-
             $response = [
                 'success' => true,
                 'data' => $this->repository->update_by_id($id, $request->all())
