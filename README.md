@@ -8,8 +8,7 @@ A simple API created using Laravel to manage movies, ratings and people related 
  1. Create a copy of `.env.example` and rename it to `.env`, then set up
     your MySQL data on it.
    
-    **Note:** I highly recommend you to use [Laravel Sail](https://laravel.com/docs/8.x/installation). It's a very easy
-    way to start a Laravel application and run the project.
+    **Note:** I highly recommend you to use [Laravel Sail](https://laravel.com/docs/8.x/installation). It's a very easy and Docker way to setup a Laravel application and run the project.
 2. Fill the database with our data, just use `php artisan migrate:refresh --seed`to run all migrations and seed all the information.
 
 ## Available endpoints
