@@ -45,7 +45,7 @@ class PersonController extends Controller
                 'name' => 'required'
             ]);
 
-            if($validator->fails()) {
+            if ($validator->fails()) {
                 throw new Exception($validator->errors());
             }
 
@@ -61,7 +61,7 @@ class PersonController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            return response()->json($response, $e->getCode());
         }
     }
 
@@ -86,7 +86,7 @@ class PersonController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            return response()->json($response, $e->getCode());
         }
     }
 
@@ -104,7 +104,7 @@ class PersonController extends Controller
                 'name' => 'required'
             ]);
 
-            if($validator->fails()) {
+            if ($validator->fails()) {
                 throw new Exception($validator);
             }
 
@@ -120,7 +120,7 @@ class PersonController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            return response()->json($response, $e->getCode());
         }
     }
 
@@ -146,7 +146,7 @@ class PersonController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            return response()->json($response, $e->getCode());
         }
     }
 }

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Repositories\RatingRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 
@@ -64,7 +63,7 @@ class RatingController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            return response()->json($response, $e->getCode());
         }
     }
 
@@ -89,7 +88,7 @@ class RatingController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            return response()->json($response, $e->getCode());
         }
     }
 
@@ -124,7 +123,7 @@ class RatingController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            return response()->json($response, $e->getCode());
         }
     }
 
@@ -150,7 +149,7 @@ class RatingController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            return response()->json($response, $e->getCode());
         }
     }
 }

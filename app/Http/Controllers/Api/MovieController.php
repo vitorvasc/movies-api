@@ -61,7 +61,7 @@ class MovieController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            return response()->json($response, $e->getCode());
         }
     }
 
@@ -86,7 +86,7 @@ class MovieController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            return response()->json($response, $e->getCode());
         }
     }
 
@@ -120,7 +120,7 @@ class MovieController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            return response()->json($response, $e->getCode());
         }
     }
 
@@ -146,7 +146,7 @@ class MovieController extends Controller
                 'message' => $e->getMessage()
             ];
 
-            return response()->json($response);
+            return response()->json($response, $e->getCode());
         }
     }
 }
