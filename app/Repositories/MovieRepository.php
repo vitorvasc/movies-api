@@ -22,9 +22,6 @@ class MovieRepository
             throw new Exception('Filme não encontrado.', 404);
         }
 
-        $movie->get_people_roles()
-            ->get_ratings_average();
-
         return $movie;
     }
 

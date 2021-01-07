@@ -45,7 +45,7 @@ class MovieController extends Controller
                 'name' => 'required'
             ]);
 
-            if($validator->fails()) {
+            if ($validator->fails()) {
                 throw new Exception($validator->errors());
             }
 
@@ -74,17 +74,19 @@ class MovieController extends Controller
     public function show(string $id): JsonResponse
     {
         try {
+            $movie = $this->repository->find_by_id($id)
+                ->get_people_roles()
+                ->get_ratings_average();
+
             $response = [
                 'success' => true,
-                'data' => $this->repository->find_by_id($id)
+                'data' => $movie
             ];
 
             return response()->json($response);
         } catch (Exception $e) {
-            $response = [
-                'success' => false,
-                'message' => $e->getMessage()
-            ];
+            $response = ['success' => false,
+                'message' => $e->getMessage()];
 
             return response()->json($response, $e->getCode());
         }
@@ -94,20 +96,13 @@ class MovieController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param string $id
+     * @param int $id
      * @return JsonResponse
      */
-    public function update(Request $request, string $id): JsonResponse
+    public
+    function update(Request $request, int $id): JsonResponse
     {
         try {
-            $validator = Validator::make($request->all(), [
-                'name' => 'required'
-            ]);
-
-            if($validator->fails()) {
-                throw new Exception($validator);
-            }
-
             $response = [
                 'success' => true,
                 'data' => $this->repository->update_by_id($id, $request->all())
@@ -130,7 +125,8 @@ class MovieController extends Controller
      * @param string $id
      * @return JsonResponse
      */
-    public function destroy(string $id): JsonResponse
+    public
+    function destroy(string $id): JsonResponse
     {
         try {
             $response = [
