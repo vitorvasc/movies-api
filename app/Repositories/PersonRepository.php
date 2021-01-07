@@ -20,7 +20,7 @@ class PersonRepository
             ->get_ratings_average();
 
         if (!$person) {
-            throw new Exception('Pessoa não encontrada.');
+            throw new Exception('Pessoa não encontrada.', 404);
         }
 
         return $person;
@@ -36,7 +36,7 @@ class PersonRepository
         $person = Person::where('name', $name)->first();
 
         if (!$person) {
-            throw new Exception('Pessoa não encontrada.');
+            throw new Exception('Pessoa não encontrada.', 404);
         }
 
         return $person;
@@ -63,7 +63,7 @@ class PersonRepository
             $person->update($data);
             return $person->fresh();
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new Exception($e->getMessage(), $e->getCode());
         }
     }
 
@@ -77,7 +77,7 @@ class PersonRepository
         $person = Person::create($data);
 
         if (!$person) {
-            throw new Exception('Ocorreu um erro ao tentar inserir o registro.');
+            throw new Exception('Ocorreu um erro ao tentar inserir o registro.', 400);
         }
 
         return $person;
@@ -94,7 +94,7 @@ class PersonRepository
             $person = $this->find_by_id($id);
             return $person->delete();
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new Exception($e->getMessage(), $e->getCode());
         }
     }
 }

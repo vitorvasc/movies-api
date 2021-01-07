@@ -17,7 +17,7 @@ class RatingRepository {
         $rating = Rating::where('id', $id)->with('movie')->first();
 
         if (!$rating) {
-            throw new Exception('Avaliação não encontrada.');
+            throw new Exception('Avaliação não encontrada.', 404);
         }
 
         return $rating;
@@ -44,7 +44,7 @@ class RatingRepository {
             $rating->update($data);
             return $rating->fresh();
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new Exception($e->getMessage(), $e->getCode());
         }
     }
 
@@ -58,7 +58,7 @@ class RatingRepository {
         $rating = Rating::create($data);
 
         if (!$rating) {
-            throw new Exception('Ocorreu um erro ao tentar inserir o registro.');
+            throw new Exception('Ocorreu um erro ao tentar inserir o registro.', 400);
         }
 
         return $rating;
@@ -75,7 +75,7 @@ class RatingRepository {
             $rating = $this->find_by_id($id);
             return $rating->delete();
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new Exception($e->getMessage(), $e->getCode());
         }
     }
 }

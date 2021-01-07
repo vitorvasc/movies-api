@@ -6,7 +6,6 @@ use App\Models\Movie;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\JsonResponse;
 
 class MovieRepository
 {
@@ -22,7 +21,7 @@ class MovieRepository
             ->get_ratings_average();
 
         if (!$movie) {
-            throw new Exception('Filme não encontrado.');
+            throw new Exception('Filme não encontrado.', 404);
         }
 
         return $movie;
@@ -38,7 +37,7 @@ class MovieRepository
         $movie = Movie::where('name', $name)->first();
 
         if (!$movie) {
-            throw new Exception('Filme não encontrado.');
+            throw new Exception('Filme não encontrado.', 404);
         }
 
         return $movie;
@@ -65,7 +64,7 @@ class MovieRepository
             $movie->update($data);
             return $movie->fresh();
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new Exception($e->getMessage(), $e->getCode());
         }
     }
 
@@ -79,7 +78,7 @@ class MovieRepository
         $movie = Movie::create($data);
 
         if (!$movie) {
-            throw new Exception('Ocorreu um erro ao tentar inserir o registro.');
+            throw new Exception('Ocorreu um erro ao tentar inserir o registro.', 400);
         }
 
         return $movie;
@@ -96,7 +95,7 @@ class MovieRepository
             $movie = $this->find_by_id($id);
             return $movie->delete();
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new Exception($e->getMessage(), $e->getCode());
         }
     }
 }
