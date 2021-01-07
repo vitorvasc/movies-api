@@ -15,9 +15,7 @@ class PersonRepository
      */
     public function find_by_id(string $id)
     {
-        $person = Person::where('id', $id)->with('ratings')->first()
-            ->get_people_roles()
-            ->get_ratings_average();
+        $person = Person::where('id', $id)->first();
 
         if (!$person) {
             throw new Exception('Pessoa não encontrada.', 404);
