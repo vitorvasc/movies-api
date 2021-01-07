@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\MovieController;
+use App\Http\Controllers\Api\PersonController;
 use App\Http\Controllers\Api\RatingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,4 +24,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resources([
     'movies' => MovieController::class,
     'ratings' => RatingController::class,
+    'person' => PersonController::class
 ]);
